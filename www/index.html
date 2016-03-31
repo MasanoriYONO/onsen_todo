@@ -7,12 +7,33 @@
     <script src="components/loader.js"></script>
     <link rel="stylesheet" href="components/loader.css">
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.2/moment.min.js"></script>  
+    <script src="js/custom.js"></script>
     <script>
         ons.bootstrap();
+        
+        ons.ready(function(){
+            console.log("ons.ready.");
+        });
+        
     </script>
 </head>
 <body>
-    <ons-navigator var="myNavigator" page="page1.html">
-    </ons-navigator> 
+    <ons-navigator page="list.html" var="myNavigator"></ons-navigator>
+      <ons-template id="list.html">
+        <ons-page id="list-page">
+          <ons-toolbar fixed-style="">
+            <div class="center">TODO</div>
+            <div class="right">
+                <ons-toolbar-button>
+                    <ons-icon id="todo_add" icon="fa-plus-circle"
+                        onclick="list2addpage();">
+                    </ons-icon>
+                </ons-toolbar-button>
+            </div>
+          </ons-toolbar>
+        </ons-page>
+      </ons-template>
 </body>
 </html>
