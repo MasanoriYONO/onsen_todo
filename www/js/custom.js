@@ -194,6 +194,33 @@ $(document).on('pageinit', '#page_view', function(event) {
     $("#todo_view_desc").html(page.options.description.replace(/[\n\r]/g, "<br />"));
     $("#todo_view_limit_date").text(page.options.limit_date.replace(/-/g, "/"));
 });
+
+function todo_edit(){
+    console.log("todo_edit.");
+
+    var options = {title:array_todo[view_index].title
+        ,description:array_todo[view_index].description
+        ,limit_date:array_todo[view_index].limit_date};
+        
+    myNavigator.pushPage("page_edit.html", options);
+
+    // myNavigator.on('postpush', function(e) {
+    //     if(e.enterPage.name == "page_edit.html"){
+    //         $(e.enterPage.element).find("#todo_update_title").val(array_todo[view_index].title);
+    //         $(e.enterPage.element).find("#todo_update_desc").val(array_todo[view_index].description);
+    //         $(e.enterPage.element).find("#todo_update_limit_date").val(array_todo[view_index].limit_date);
+    //     }
+    // });
+}
+
+$(document).on('pageinit', '#page_edit', function(event) {
+    console.log("pageinit page_edit.");
+    var page = myNavigator.getCurrentPage();
+    $("#todo_update_title").val(page.options.title);
+    $("#todo_update_desc").val(page.options.description);
+    $("#todo_update_limit_date").val(page.options.limit_date);
+});
+
 function todo_regi(){
     console.log("todo_regi.");
     

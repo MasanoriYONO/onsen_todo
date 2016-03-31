@@ -1,0 +1,28 @@
+<ons-page id="page_edit">
+    <ons-toolbar fixed-style="">
+        <div class="left"><ons-back-button>Back</ons-back-button></div>
+        <div class="center">TODOの更新</div>
+    </ons-toolbar>
+        
+    <div>
+        <section style="padding: 20px 10px 10px 10px">
+          <span class="sub_title">タイトル</span>
+          <input type="text" class="text-input" id="todo_update_title" style="display: block; width: 100%">
+        </section>
+    
+        <section style="padding: 10px 10px 10px 10px">
+          <span class="sub_title">TODOの内容</span>
+          <textarea class="textarea" id="todo_update_desc" style="width: 100%; height: 100px;"></textarea>
+        </section>
+        
+        <section style="padding: 20px 10px 10px 10px">
+          <span class="sub_title">締め切り</span>
+          <input type="date" class="text-input" id="todo_update_limit_date" placeholder="" style="display: block; width: 100%">
+        </section>
+    
+        <section style="padding: 10px 10px 10px 10px">
+          <ons-button modifier="large--cta" onclick="todo_update();">更新する</ons-button>
+        </section>
+    </div>
+
+</ons-page>
