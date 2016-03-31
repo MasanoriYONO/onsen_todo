@@ -74,6 +74,9 @@ function todo_querySuccess(sql, results){
             console.log(array_todo[i].limit_date);
         }
     }
+    
+    var todo_list = new TodoList();
+    todo_list.load();
 }
 
 function todo_insert_success_CB() {
