@@ -45,6 +45,11 @@ var TodoList = (function() {
             var t_limit = moment(array_todo[i].limit_date);
             console.log("limit:" + t_limit.isBefore(m));
             
+            var t_limit_style = "";
+            if(t_limit.isBefore(m)){
+                t_limit_style = "color: #FF0000";
+            } 
+            
             todo_str += '<ons-list-item modifier="chevron" ' + 
                 ' class="item list__item ons-list-item-inner list__item--chevron" ' + 
                 ' onclick="view_todo(' + i + ')" id="l_row_' + i + '">'+
@@ -55,7 +60,7 @@ var TodoList = (function() {
                 '<ons-col class="col ons-col-inner"><header>' +
                 '<span class="item-title">' +
                 array_todo[i].title + 
-                '</span><span class="item-label">' + 
+                '</span><span class="item-label" style="' + t_limit_style + '">' + 
                 array_todo[i].limit_date.replace(/-/g,"/") +
                 '</span></header>' + 
                 '<p class="item-desc">' + t_desc + '</p>' + 
