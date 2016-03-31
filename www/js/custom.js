@@ -66,6 +66,12 @@ function todo_insertSQL(tx) {
     tx.executeSql('INSERT INTO TODO (title, description,limit_date) VALUES ("' + todo_title + '","' + todo_desc + '","' + todo_limit_date + '")');
 }
 
+function todo_updateSQL(tx) {
+    console.log("todo_updateSQL.");
+    
+    tx.executeSql('UPDATE TODO SET description = "'+ todo_desc + '", title="' + todo_title  + '", limit_date="' + todo_limit_date  + '" where id = ' + update_id);
+}
+
 function todo_delete_SQL(tx) {
     console.log("todo_delete_SQL.");
     
@@ -112,6 +118,12 @@ function todo_insert_success_CB() {
     p_db.transaction(todo_view_record_SQL, todo_errorCB);
 }
 
+function todo_update_success_CB() {
+    console.log("todo_update_success_CB.");
+    
+    p_db.transaction(todo_view_record_SQL, todo_errorCB);
+}
+
 function todo_createDB() {
     console.log("todo_createDB.");
     
@@ -128,6 +140,12 @@ function todo_insertDB() {
     console.log("todo_insertDB.");
     
     p_db.transaction(todo_insertSQL, todo_errorCB, todo_insert_success_CB);
+}
+
+function todo_updateDB() {
+    console.log("todo_updateDB.");
+    
+    p_db.transaction(todo_updateSQL, todo_errorCB, todo_update_success_CB);
 }
 
 function todo_getFromDB() {
@@ -220,6 +238,34 @@ $(document).on('pageinit', '#page_edit', function(event) {
     $("#todo_update_desc").val(page.options.description);
     $("#todo_update_limit_date").val(page.options.limit_date);
 });
+
+function todo_update(){
+    console.log("todo_update.");
+    
+    todo_title = $("#todo_update_title").val();
+    todo_desc = $("#todo_update_desc").val();
+    todo_limit_date = $("#todo_update_limit_date").val();
+    
+    console.log("todo_title:" + todo_title);
+    console.log("todo_desc:" + todo_desc);
+    console.log("todo_limit_date:" + todo_limit_date);
+    
+    update_id = array_todo[view_index].id;
+    
+    todo_updateDB();
+    
+    navigator.notification.confirm(
+            "更新しました。", 
+            function(){
+                console.log("更新しました。");
+                myNavigator.popPage();
+                $("#todo_view_title").text(array_todo[view_index].title);
+                $("#todo_view_desc").html(array_todo[view_index].description.replace(/[\n\r]/g, "<br />")); 
+                $("#todo_view_limit_date").text(array_todo[view_index].limit_date.replace(/-/g, "/"));
+            }, 
+            "TODO", 
+            ["OK"]);
+}
 
 function todo_regi(){
     console.log("todo_regi.");
