@@ -129,6 +129,37 @@ $(document).on('pageinit', '#page_add', function(event) {
     $("#todo_limit_date").val(page.options.limit_date);
 });
 
+function view_todo(index){
+    
+    console.log("view_todo.");
+    
+    view_index = index;
+    
+    console.log(array_todo[index].title);
+    console.log(array_todo[index].description);
+    
+    var options = {title:array_todo[index].title
+        ,description:array_todo[index].description
+        ,limit_date:array_todo[index].limit_date};
+    
+    myNavigator.pushPage("page_view.html", options);
+        
+    // myNavigator.on('postpush', function(e) {
+    //     if(e.enterPage.name == "page_view.html"){
+    //         $(e.enterPage.element).find("#todo_view_title").text(array_todo[index].title);
+    //         $(e.enterPage.element).find("#todo_view_desc").html(array_todo[index].description.replace(/[\n\r]/g, "<br />"));
+    //         $(e.enterPage.element).find("#todo_view_limit_date").text(array_todo[index].limit_date);
+    //     }
+    // });
+}
+
+$(document).on('pageinit', '#page_view', function(event) {
+    console.log("pageinit page_view.");
+    var page = myNavigator.getCurrentPage();
+    $("#todo_view_title").text(page.options.title);
+    $("#todo_view_desc").html(page.options.description.replace(/[\n\r]/g, "<br />"));
+    $("#todo_view_limit_date").text(page.options.limit_date.replace(/-/g, "/"));
+});
 function todo_regi(){
     console.log("todo_regi.");
     

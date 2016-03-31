@@ -1,0 +1,28 @@
+<ons-page id="page_view">
+    <ons-toolbar fixed-style="">
+        <div class="left"><ons-back-button>Back</ons-back-button></div>
+        <div class="center">TODO</div>
+    </ons-toolbar>
+        
+    <div style="text-align: left">
+        <section style="padding: 20px 10px 10px 10px">
+          <span class="sub_title">タイトル</span>
+          <span id="todo_view_title" style="display: block; width: 100%;"></span>
+        </section>
+    
+        <section style="padding: 10px 10px 10px 10px">
+          <span class="sub_title">TODOの内容</span>
+          <span id="todo_view_desc" style="display: block; width: 100%;"></span>
+        </section>
+        
+        <section style="padding: 10px 10px 10px 10px">
+          <span class="sub_title">締め切り</span>
+          <span id="todo_view_limit_date" style="display: block; width: 100%;"></span>
+        </section>
+        
+        <section style="padding: 10px 10px 10px 10px">
+          <ons-button modifier="large--cta" onclick="todo_edit();">編集する</ons-button>
+        </section>
+    </div>
+
+</ons-page>
