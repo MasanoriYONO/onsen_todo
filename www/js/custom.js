@@ -16,6 +16,26 @@ function todo(id, title, description, limit_date){
     this.limit_date = limit_date;
 }
 
+function modify_div(id){
+    confirm_id = id
+    
+    navigator.notification.confirm(
+            "削除しますか？", 
+            deleteCallback, 
+            "このTODOを削除", 
+            ["OK","キャンセル"]);
+    
+}
+
+function deleteCallback(buttonIndex){
+    if(buttonIndex == 1){
+        delete_id = array_todo[confirm_id].id;
+        console.log("deleteCallback:" + delete_id);
+        
+        todo_delete_DB();
+    }
+}
+
 //// DB作成。
 function todo_populateSQL(tx) {
     console.log("todo_populateSQL.");
@@ -44,6 +64,13 @@ function todo_insertSQL(tx) {
     console.log("todo_insertSQL.");
     
     tx.executeSql('INSERT INTO TODO (title, description,limit_date) VALUES ("' + todo_title + '","' + todo_desc + '","' + todo_limit_date + '")');
+}
+
+function todo_delete_SQL(tx) {
+    console.log("todo_delete_SQL.");
+    
+    tx.executeSql('DELETE FROM TODO where id = ' + delete_id);
+    delete_id = 0;
 }
 
 function todo_querySuccess(sql, results){
@@ -108,6 +135,13 @@ function todo_getFromDB() {
     
     p_db.transaction(todo_view_record_SQL, todo_errorCB);
 }
+
+function todo_delete_DB(){
+    console.log("todo_delete_DB.");
+    
+    p_db.transaction(todo_delete_SQL, todo_errorCB, todo_insert_success_CB);
+}
+
 function todo_errorCB(err) {
     console.log("todo_errorCB.");
     alert("SQL 実行中にエラーが発生しました: " + err.message);
